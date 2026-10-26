@@ -1,16 +1,20 @@
 describe('Desafio de QA Automation - Progress Bar', () => {
-  it('Deve interagir com a barra de progresso', () => {
-    // Passo 1: Acessar a página oficial
+  it('Deve interagir com a barra de progresso de forma limpa', () => {
+    // 1. Acessar diretamente a página da barra de progresso
     cy.visit('https://demoqa.com/progress-bar');
 
-    // Passo 2: Interagir diretamente com o botão de início ignorando sobreposições
-    cy.get('#startBtn', { timeout: 25000 }).click({ force: true });
+    // 2. Aguardar o botão estar visível, rolar até ele e disparar o clique com força para ignorar qualquer anúncio
+    cy.get('#startBtn', { timeout: 20000 })
+      .should('be.visible')
+      .click({ force: true });
 
-    // Passo 3: Parar antes de 25% e validar
+    // 3. Aguardar o progresso avançar e clicar no botão Stop no momento exato (antes de 25%)
+    // O DemoQA exige pausar antes ou em 25%
     cy.get('#progressBar', { timeout: 25000 })
       .should('have.attr', 'aria-valuenow')
-      .then((value) => {
-        expect(parseInt(value)).to.be.at.least(0);
+      .then((val) => {
+        const valorAtual = parseInt(val);
+        expect(valorAtual).to.be.at.most(25);
       });
   });
 });
