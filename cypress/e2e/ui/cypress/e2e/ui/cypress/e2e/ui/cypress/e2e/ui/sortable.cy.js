@@ -1,4 +1,3 @@
-JavaScript
 describe('Desafio de QA Automation - Sortable', () => {
 
   it('Deve ordenar os elementos da lista utilizando interações', () => {
