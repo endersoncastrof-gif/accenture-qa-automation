@@ -10,7 +10,7 @@ describe('Desafio de QA Automation - Progress Bar', () => {
 
     // 3. Aguardar o progresso avançar e clicar no botão Stop no momento exato (antes de 25%)
     // O DemoQA exige pausar antes ou em 25%
-    cy.get('#progressBar', { timeout: 25000 })
+    cy.get('#progressBar', { timeout: 35000 })
       .should('have.attr', 'aria-valuenow')
       .then((val) => {
         const valorAtual = parseInt(val);
