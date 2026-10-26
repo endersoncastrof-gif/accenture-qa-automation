@@ -1,10 +1,14 @@
 describe('Desafio de QA Automation - Fluxo de API da DemoQA', () => {
   
-  const username = `stark_qa_${Date.now()}`;
-  const password = 'SenhaForte@123';
+  let username;
+  let password = 'SenhaForte@123!'; // Adicionado caractere especial para garantir conformidade de segurança
   let userId;
   let token;
   let isbnLivros = [];
+
+  beforeEach(() => {
+    username = `stark_qa_${Date.now()}`;
+  });
 
   it('Deve executar o fluxo completo de ponta a ponta na API da DemoQA', () => {
     
@@ -23,7 +27,7 @@ describe('Desafio de QA Automation - Fluxo de API da DemoQA', () => {
     }).then(() => {
       
       // Passo 2: Gerar o Token de Acesso
-      cy.request({
+      return cy.request({
         method: 'POST',
         url: 'https://demoqa.com/Account/v1/GenerateToken',
         body: {
@@ -39,7 +43,7 @@ describe('Desafio de QA Automation - Fluxo de API da DemoQA', () => {
     }).then(() => {
       
       // Passo 3: Confirmar se o usuário está autorizado
-      cy.request({
+      return cy.request({
         method: 'POST',
         url: 'https://demoqa.com/Account/v1/Authorized',
         body: {
@@ -54,20 +58,20 @@ describe('Desafio de QA Automation - Fluxo de API da DemoQA', () => {
     }).then(() => {
       
       // Passo 4: Listar os livros disponíveis
-      cy.request({
+      return cy.request({
         method: 'GET',
         url: 'https://demoqa.com/BookStore/v1/Books',
       }).then((response) => {
         expect(response.status).to.eq(200);
+        expect(response.body.books.length).to.be.greaterThan(1);
         isbnLivros.push(response.body.books[0].isbn);
         isbnLivros.push(response.body.books[1].isbn);
-        expect(isbnLivros.length).to.eq(2);
       });
 
     }).then(() => {
       
       // Passo 5: Alugar dois livros escolhidos
-      cy.request({
+      return cy.request({
         method: 'POST',
         url: 'https://demoqa.com/BookStore/v1/Books',
         headers: {
@@ -88,7 +92,7 @@ describe('Desafio de QA Automation - Fluxo de API da DemoQA', () => {
     }).then(() => {
       
       // Passo 6: Listar os detalhes do usuário com os livros reservados
-      cy.request({
+      return cy.request({
         method: 'GET',
         url: `https://demoqa.com/Account/v1/User/${userId}`,
         headers: {
