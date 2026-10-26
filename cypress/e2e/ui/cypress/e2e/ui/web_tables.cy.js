@@ -1,4 +1,3 @@
-JavaScript
 describe('Desafio de QA Automation - Web Tables', () => {
 
   it('Deve criar, editar e deletar um registro na tabela', () => {
