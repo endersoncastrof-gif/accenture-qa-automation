@@ -1,4 +1,3 @@
-JavaScript
 describe('Desafio de QA Automation - Frontend (Practice Form)', () => {
 
   it('Parte 2: Preencher o Practice Form, fazer upload de arquivo e validar popup', () => {
