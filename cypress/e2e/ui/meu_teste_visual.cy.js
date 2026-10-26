@@ -1,4 +1,3 @@
-JavaScript
 describe('Desafio de QA Automation - Testes Visuais e de UI', () => {
 
   beforeEach(() => {
