@@ -1,4 +1,3 @@
-JavaScript
 describe('Desafio de QA Automation - Progress Bar', () => {
 
   it('Deve interagir com a barra de progresso, pausar antes de 25% e resetar nos 100%', () => {
