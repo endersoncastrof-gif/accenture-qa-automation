@@ -1,4 +1,3 @@
-JavaScript
 describe('Desafio de QA Automation - Browser Windows', () => {
 
   it('Deve abrir uma nova janela, validar a mensagem e fechá-la', () => {
